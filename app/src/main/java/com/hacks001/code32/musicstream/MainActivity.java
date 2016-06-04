@@ -1,9 +1,13 @@
 package com.hacks001.code32.musicstream;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,7 +35,8 @@ Button start,stop,pause;
                 if(mPlayer.isPlaying()==true){
                     Toast.makeText(getApplicationContext(),"Yes its Buffering",Toast.LENGTH_LONG).show();
                 }
-
+              int size=  mPlayer.getDuration();
+                Toast.makeText(getApplication(),"The Size of The song is"+size,Toast.LENGTH_LONG).show();
             }
         });
         pause.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +76,28 @@ Button start,stop,pause;
                 }
             });
 
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.fragmentadder, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.new_game:
+                Toast.makeText(getApplicationContext(),"About",Toast.LENGTH_SHORT).show();
+                // Explicit Intent by specifying its class name
+                Intent i = new Intent(MainActivity.this, About.class);
+
+// Starts TargetActivity
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
